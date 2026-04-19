@@ -11,6 +11,7 @@ public class Main {
     private static final User[] users = new User[MAX_USERS];
     private static int userCount = 0;
     private static User currentUser = null;
+    
 
     public static void main(String[] args) {
         System.out.println("===========================================");
