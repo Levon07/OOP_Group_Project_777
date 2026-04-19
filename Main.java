@@ -125,8 +125,8 @@ public class Main {
         System.out.println("║         MAIN MENU - " + String.format("%-18s", currentUser.getUsername()) + "║");
         System.out.println("╚════════════════════════════════════════╝");
         System.out.println("1. Balance Operations");
-        System.out.println("2. Transaction Operations");     // TODO: not done yet
-        System.out.println("3. Transaction History");        // TODO: not done yet
+        System.out.println("2. Transaction Operations");     // not done yet
+        System.out.println("3. Transaction History");        // not done yet
         System.out.println("4. Logout");
         System.out.println("5. Exit");
         System.out.print("\nEnter choice: ");
@@ -137,11 +137,10 @@ public class Main {
                 showBalanceMenu();
                 break;
             case 2:
-                // TODO: implement transaction menu (withdraw + transfer)
+                // implement transaction menu (withdraw + transfer)
                 System.out.println("⚠ Transaction operations not implemented yet.");
                 break;
             case 3:
-                // TODO: call currentUser.getWallet().printTransactionHistory() once Wallet is ready
                 System.out.println("⚠ Transaction history not implemented yet.");
                 break;
             case 4:
@@ -165,7 +164,7 @@ public class Main {
             System.out.println("\n╔════════════════════════════════════════╗");
             System.out.println("║         BALANCE OPERATIONS             ║");
             System.out.println("╚════════════════════════════════════════╝");
-            System.out.println("1. Add Funds (Deposit)");   // TODO: deposit is partially working
+            System.out.println("1. Add Funds (Deposit)");   // deposit is partially working
             System.out.println("2. Check Balance");
             System.out.println("3. Back to Main Menu");
             System.out.print("\nEnter choice: ");
@@ -194,7 +193,7 @@ public class Main {
         System.out.print("Enter amount to deposit: ");
         double amount = getDoubleInput();
 
-        // TODO: deposit works but we still need to validate max deposit limit
+        // deposit works but we still need to validate max deposit limit
         try {
             currentUser.getWallet().deposit(currency, amount);
             System.out.println("✅ Deposit successful!");
