@@ -5,3 +5,7 @@ A Java console application that simulates a cryptocurrency wallet management sys
 ________________________
 
 Our current progress at Week 12 includes completing the core class architecture (User, Wallet, Transaction), implementing fundamental wallet operations such as deposit, withdrawal, and transfer, and establishing a structure that supports future extensions.
+
+________________________
+
+Finalizing our project. Successfully completed the originally planned functionality and finalized the core implementation of the cryptocurrency wallet management system.
