@@ -29,5 +29,8 @@ ________________________
 
 Finalizing our project. Successfully completed the originally planned functionality and finalized the core implementation of the cryptocurrency wallet management system.
 
+_____________________
 
+
+# How to use our application
 
