@@ -11,7 +11,6 @@ public enum CryptoCurrency {
     CryptoCurrency(String fullName) {
         this.fullName = fullName;
     }
-
     public String getFullName() {
         return fullName;
     }
