@@ -19,9 +19,9 @@ public class Main {
         System.out.println("===========================================\n");
 
         // Initialize with some demo users
-        addUser(new User("Movses", "movses_tonyan@edu.aua.am"));
-        addUser(new User("Davit",   "davit_chilingaryan@edu.aua.am"));
-        addUser(new User("Levon", "levon_nazinyan@edu.aua.am"));
+        addUser(new User("Movses", "movses_tonyan@edu.aua.am","admin"));
+        addUser(new User("Davit",   "davit_chilingaryan@edu.aua.am", "admin"));
+        addUser(new User("Levon", "levon_nazinyan@edu.aua.am", "admin"));
 
         boolean running = true;
         while (running) {
@@ -100,7 +100,10 @@ public class Main {
         System.out.print("Enter email: ");
         String email = scanner.nextLine().trim();
 
-        addUser(new User(username, email));
+        System.out.print("Enter password: ");
+        String password = scanner.nextLine().trim();
+
+        addUser(new User(username, email, password));
         System.out.println("✅ Registration successful! You can now login.");
     }
 

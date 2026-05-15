@@ -154,14 +154,14 @@ public class CryptoWalletGUI extends JFrame {
         box.setPreferredSize(new Dimension(420, 520));
 
         // Logo / title
-        JLabel logo = new JLabel("◈ CryptoWallet", SwingConstants.CENTER);
+        JLabel logo = new JLabel("CryptoWallet", SwingConstants.CENTER);
         logo.setFont(new Font("SansSerif", Font.BOLD, 26));
         logo.setForeground(ACCENT);
         logo.setAlignmentX(Component.CENTER_ALIGNMENT);
         box.add(logo);
         box.add(Box.createVerticalStrut(6));
 
-        JLabel sub = new JLabel("Secure Digital Asset Management", SwingConstants.CENTER);
+        JLabel sub = new JLabel("Intro to Object Oriented Programming Project", SwingConstants.CENTER);
         sub.setFont(new Font("SansSerif", Font.PLAIN, 13));
         sub.setForeground(TEXT_MUTED);
         sub.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -665,17 +665,25 @@ public class CryptoWalletGUI extends JFrame {
         // Transaction table
         txTableModel.setRowCount(0);
         Wallet w = currentUser.getWallet();
-        for (int i = w.getTransactionCount() - 1; i >= 0; i--) {
-            Transaction tx = w.getTransactions()[i];
-            String from = tx.getFromWallet() != null ? tx.getFromWallet().getOwner().getUsername() : "EXTERNAL";
-            String to   = tx.getToWallet()   != null ? tx.getToWallet().getOwner().getUsername()   : "EXTERNAL";
+        for (int i = w.getTransactions().size() - 1; i >= 0; i--) {
+
+            Transaction tx = w.getTransactions().get(i);
+
+            String from = tx.getFromWallet() != null
+                    ? tx.getFromWallet().getOwner().getUsername()
+                    : "EXTERNAL";
+
+            String to = tx.getToWallet() != null
+                    ? tx.getToWallet().getOwner().getUsername()
+                    : "EXTERNAL";
+
             txTableModel.addRow(new Object[]{
-                tx.getTransactionId(),
-                tx.getType().name(),
-                tx.getCurrency().name(),
-                String.format("%.4f", tx.getAmount()),
-                from,
-                to
+                    tx.getTransactionId(),
+                    tx.getType().name(),
+                    tx.getCurrency().name(),
+                    String.format("%.4f", tx.getAmount()),
+                    from,
+                    to
             });
         }
     }
@@ -755,8 +763,6 @@ public class CryptoWalletGUI extends JFrame {
     /**
      * Creates a styled label used for form field descriptions.
      *
-     * @param text the label text
-     * @return a styled JLabel component
      */
     private void setStatus(String msg) {
         statusLabel.setText(msg);

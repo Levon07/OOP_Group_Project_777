@@ -1,5 +1,6 @@
 package payment_system;
 
+import java.util.ArrayList;
 import payment_system.exceptions.InsufficientFundsException;
 import payment_system.exceptions.InvalidAmountException;
 
@@ -15,20 +16,14 @@ import payment_system.exceptions.InvalidAmountException;
  */
 public class Wallet {
 
-    /** Maximum number of transactions stored in the wallet history. */
-    private static final int MAX_TRANSACTIONS = 1000;
-
     /** The owner of the wallet. */
     private final User owner;
 
     /** Array storing balances for each cryptocurrency. */
     private final double[] balances;
 
-    /** Array storing wallet transactions. */
-    private final Transaction[] transactions;
-
-    /** Current number of stored transactions. */
-    private int transactionCount = 0;
+    /** List storing wallet transactions. */
+    private final ArrayList<Transaction> transactions;
 
     /**
      * Constructs a new wallet for a specific user.
@@ -38,7 +33,7 @@ public class Wallet {
     public Wallet(User owner) {
         this.owner = owner;
         this.balances = new double[CryptoCurrency.values().length];
-        this.transactions = new Transaction[MAX_TRANSACTIONS];
+        this.transactions = new ArrayList<>();
     }
 
     /**
@@ -61,6 +56,33 @@ public class Wallet {
     }
 
     /**
+     * Prints the full transaction history of the wallet.
+     * If no transactions exist, prints a message.
+     */
+    public void printTransactionHistory() {
+        if (transactions.isEmpty()) {
+            System.out.println("No transactions yet.");
+            return;
+        }
+
+        System.out.println("\n===== TRANSACTION HISTORY =====");
+        for (Transaction t : transactions) {
+            System.out.println(t);
+        }
+    }
+
+    /**
+     * Prints all cryptocurrency balances in the wallet.
+     */
+    public void printBalances() {
+        System.out.println("\n===== WALLET BALANCES =====");
+
+        for (CryptoCurrency currency : CryptoCurrency.values()) {
+            System.out.println(currency + ": " + balances[currency.ordinal()]);
+        }
+    }
+
+    /**
      * Deposits an amount into the wallet.
      *
      * @param currency the cryptocurrency to deposit
@@ -71,8 +93,7 @@ public class Wallet {
             throws InvalidAmountException {
 
         if (amount <= 0)
-            throw new InvalidAmountException(
-                    "Deposit amount must be positive. Got: " + amount);
+            throw new InvalidAmountException("Deposit must be positive");
 
         balances[currency.ordinal()] += amount;
 
@@ -91,20 +112,16 @@ public class Wallet {
      * @param currency the cryptocurrency to withdraw
      * @param amount the amount to withdraw
      * @throws InvalidAmountException if the amount is not positive
-     * @throws InsufficientFundsException if the balance is insufficient
+     * @throws InsufficientFundsException if balance is insufficient
      */
     public void withdraw(CryptoCurrency currency, double amount)
             throws InvalidAmountException, InsufficientFundsException {
 
         if (amount <= 0)
-            throw new InvalidAmountException(
-                    "Withdrawal amount must be positive. Got: " + amount);
+            throw new InvalidAmountException("Withdrawal must be positive");
 
         if (balances[currency.ordinal()] < amount)
-            throw new InsufficientFundsException(
-                    "Insufficient " + currency.name()
-                            + ". Balance: " + balances[currency.ordinal()]
-                            + ", required: " + amount);
+            throw new InsufficientFundsException("Not enough balance");
 
         balances[currency.ordinal()] -= amount;
 
@@ -124,20 +141,16 @@ public class Wallet {
      * @param currency the cryptocurrency to transfer
      * @param amount the amount to transfer
      * @throws InvalidAmountException if the amount is not positive
-     * @throws InsufficientFundsException if the balance is insufficient
+     * @throws InsufficientFundsException if balance is insufficient
      */
     public void transfer(Wallet toWallet, CryptoCurrency currency, double amount)
             throws InvalidAmountException, InsufficientFundsException {
 
         if (amount <= 0)
-            throw new InvalidAmountException(
-                    "Transfer amount must be positive. Got: " + amount);
+            throw new InvalidAmountException("Transfer must be positive");
 
         if (balances[currency.ordinal()] < amount)
-            throw new InsufficientFundsException(
-                    "Insufficient " + currency.name()
-                            + ". Balance: " + balances[currency.ordinal()]
-                            + ", required: " + amount);
+            throw new InsufficientFundsException("Not enough balance");
 
         balances[currency.ordinal()] -= amount;
         toWallet.balances[currency.ordinal()] += amount;
@@ -155,31 +168,17 @@ public class Wallet {
     }
 
     /**
-     * Returns the transaction history array.
-     *
-     * @return the transactions array
-     */
-    public Transaction[] getTransactions() {
-        return transactions;
-    }
-
-    /**
-     * Returns the number of stored transactions.
-     *
-     * @return the transaction count
-     */
-    public int getTransactionCount() {
-        return transactionCount;
-    }
-
-    /**
      * Adds a transaction to the wallet history.
      *
      * @param tx the transaction to add
      */
+
+
     private void addTransaction(Transaction tx) {
-        if (transactionCount < MAX_TRANSACTIONS) {
-            transactions[transactionCount++] = tx;
-        }
+        transactions.add(tx);
+    }
+
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
     }
 }
