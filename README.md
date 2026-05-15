@@ -7,17 +7,19 @@ Class design:
 payment_system (package)
 |
 | exceptions
+|
         |
         | InsufficientFundsException.java
         |
         | InvalidAmountException
 |
 | CryptoCurrency.java
-| Main.java
+| CryptoWalletGUI.java
 | Transaction.java
 | TransactionType.java
 | User.java
 | Wallet.java
+|
 ```
 ________________________
 
@@ -26,3 +28,6 @@ Our current progress at Week 12 includes completing the core class architecture 
 ________________________
 
 Finalizing our project. Successfully completed the originally planned functionality and finalized the core implementation of the cryptocurrency wallet management system.
+
+
+
